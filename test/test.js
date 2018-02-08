@@ -25,10 +25,6 @@ describe('regex', function () {
   it(`匹配8位 hex 代码，以'0x'开头，后面跟着两个字符可以是大写'A-F'，小写'a-f'，或者任意数字`, function () {
     const f = require('../lib/quantified_group')
 
-    console.log(f('0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF\n'))
-    console.log(f('0x0f  0x1f  0x2f  0x3f  0x4f  0x5f  0x6f  0x7f\n'))
-    console.log(f('0xE2 0xC3 0xB3 0xD0 0x44 0x9E 0x6F 0x7F\n'))
-    console.log(f('0xE2 0xC3 0xB3 0xD0 0x44 0x9E 0x6F 0xff 0xff\n'))
     assert.ok(
       f('0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF\n'),
       '0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF\\n'
@@ -57,6 +53,7 @@ describe('regex', function () {
 
   it('匹配所有引号', function () {
     const f = require('../lib/quotes')
+
     assert.deepEqual(
       f('one "two three four" five six "seven eight" nine'),
       ['"two three four"','"seven eight"'],
@@ -72,7 +69,7 @@ describe('regex', function () {
 
   it(`将'@@...@@'markdown语法变成'<blink>...</blink>'`, function () {
     const f = require('../lib/blink')
-    
+
     assert.equal(
       f('@@whatever@@').trim(),
       '<p><blink>whatever</blink></p>',
